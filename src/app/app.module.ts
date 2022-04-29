@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+
+import { ConversorModule } from './conversor';
+
 import { AppComponent } from './app.component';
 
 // Importação de módulos do NG-ZORRO
@@ -19,7 +21,12 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, NzIconModule.forRoot(icons)],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ConversorModule,
+    NzIconModule.forRoot(icons),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
