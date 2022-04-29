@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ConversorModule } from './conversor';
 
@@ -24,6 +25,7 @@ const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ConversorModule,
     NzIconModule.forRoot(icons),
   ],
