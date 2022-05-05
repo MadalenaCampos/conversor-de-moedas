@@ -5,9 +5,25 @@ import { MoedaService, ConversorService } from './services';
 
 import { ConversorComponent } from './components';
 
+// Modulos do Zorro
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 @NgModule({
   declarations: [ConversorComponent],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    NzAlertModule,
+    NzInputModule,
+    NzSelectModule,
+    NzIconModule,
+    NzModalModule,
+    NzButtonModule,
+  ],
   exports: [ConversorComponent],
   providers: [MoedaService, ConversorService],
 })

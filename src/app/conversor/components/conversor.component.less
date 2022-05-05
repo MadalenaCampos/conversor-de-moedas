@@ -1,0 +1,47 @@
+.aviso {
+  margin-bottom: 0.5rem;
+}
+
+.selecao {
+  width: 98%;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #319fdf;
+
+  .header {
+    background-color: #319fdf;
+    padding: 0.5rem;
+
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #ffffff !important;
+    }
+  }
+
+  .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+
+    .inputs {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      i {
+        color: black !important;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  nz-select {
+    width: 100px !important;
+  }
+}

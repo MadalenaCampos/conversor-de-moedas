@@ -1,1 +1,61 @@
-<p>conversor works!</p>
+<div class="aviso">
+  <nz-alert
+    nzBanner
+    nzType="error"
+    nzMessage="Erro ao tentar obter dados, por favor, tente novamente em alguns segundos"
+    nzCloseable
+  ></nz-alert>
+</div>
+
+<div class="selecao">
+  <div class="header">
+    <h1>Selecione a moeda a ser convertida</h1>
+  </div>
+
+  <div class="form">
+    <form class="inputs">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="De">
+        <nz-option
+          *ngFor="let moeda of moedas"
+          nzCustomContent
+          [nzLabel]="moeda.sigla"
+          [nzValue]="moeda.nome"
+        >
+          {{ moeda.nome }}
+        </nz-option>
+      </nz-select>
+      <input style="width: 100px; text-align: right" nz-input placeholder="0"/>
+      <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Para">
+        <nz-option
+          *ngFor="let moeda of moedas"
+          nzCustomContent
+          [nzLabel]="moeda.sigla"
+          [nzValue]="moeda.nome"
+        >
+          {{ moeda.nome }}
+        </nz-option>
+      </nz-select>
+    </form>
+
+    <button nz-button nzType="default" nzShape="circle" (click)="abrirModal()">
+      <i nz-icon nzType="search"></i>
+    </button>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Cotação do dia [DATA]"
+  nzClosable="false"
+  nzCancelText="Fechar"
+  (nzOnCancel)="sairOutraConsulta()"
+  nzOkText="Fazer outra consulta"
+  (nzOnOk)="sairOutraConsulta()"
+>
+  <ng-container *nzModalContent>
+    <p>Bla bla ...</p>
+    <p>Bla bla ...</p>
+    <p>Bla bla ...</p>
+  </ng-container>
+</nz-modal>
