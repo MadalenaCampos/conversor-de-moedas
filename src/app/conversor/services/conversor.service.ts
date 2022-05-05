@@ -35,6 +35,7 @@ export class ConversorService {
     }
     return conversaoResponse.rates[conversao.moedaPara];
   }
+
   public cotacaoDe(
     conversaoResponse: ConversaoResponse,
     conversao: Conversao
