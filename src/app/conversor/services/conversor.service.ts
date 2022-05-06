@@ -43,7 +43,7 @@ export class ConversorService {
     if (conversaoResponse === undefined) {
       return '0';
     }
-    return (1 / conversaoResponse.rates[conversao.moedaPara]).toFixed(4);
+    return (1 / conversaoResponse.rates[conversao.moedaPara]).toFixed(2);
     // O 1 é usado como base, representado uma unidade da moeda base, onde 1 dividido pela moeda de destino me permite saber qual a cotação da minha moeda base. O 4 é o número de casas decimais que serão mostradas.
   }
 

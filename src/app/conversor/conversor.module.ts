@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Ngx-mask
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+
 import { MoedaService, ConversorService } from './services';
 
 import { ConversorComponent } from './components';
@@ -23,6 +27,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzIconModule,
     NzModalModule,
     NzButtonModule,
+    NgxMaskModule.forRoot(),
   ],
   exports: [ConversorComponent],
   providers: [MoedaService, ConversorService],

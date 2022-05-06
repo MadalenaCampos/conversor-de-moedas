@@ -13,49 +13,62 @@
   </div>
 
   <div class="form">
+
     <form class="inputs">
       <nz-select nzShowSearch nzAllowClear nzPlaceHolder="De">
         <nz-option
           *ngFor="let moeda of moedas"
           nzCustomContent
-          [nzLabel]="moeda.sigla"
-          [nzValue]="moeda.nome"
+          [nzLabel]="moeda.descricao"
+          [nzValue]="moeda.sigla"
         >
-          {{ moeda.nome }}
+          {{ moeda.sigla }}
         </nz-option>
       </nz-select>
-      <input style="width: 100px; text-align: right" nz-input placeholder="0"/>
+
+      <input
+        nz-input
+        style="width: 100px; text-align: right"
+        placeholder="0"
+        mask="0*.00"
+      />
+
       <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+
       <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Para">
         <nz-option
           *ngFor="let moeda of moedas"
           nzCustomContent
-          [nzLabel]="moeda.sigla"
-          [nzValue]="moeda.nome"
+          [nzLabel]="moeda.descricao"
+          [nzValue]="moeda.sigla"
         >
-          {{ moeda.nome }}
+          {{ moeda.sigla }}
         </nz-option>
       </nz-select>
+
     </form>
 
-    <button nz-button nzType="default" nzShape="circle" (click)="abrirModal()">
+    <button
+      nz-button
+      nzType="default"
+      nzShape="circle"
+      (click)="abrirModal()"
+      [nzLoading]="loading"
+      (click)="abrirModal()"
+    >
       <i nz-icon nzType="search"></i>
     </button>
   </div>
 </div>
 
 <nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Cotação do dia [DATA]"
+  [(nzVisible)]="modalAberto"
+  nzTitle="Cotação em: [DATA]"
   nzClosable="false"
   nzCancelText="Fechar"
-  (nzOnCancel)="sairOutraConsulta()"
+  (nzOnCancel)="sairEOutraConsulta()"
   nzOkText="Fazer outra consulta"
-  (nzOnOk)="sairOutraConsulta()"
+  (nzOnOk)="sairEOutraConsulta()"
 >
-  <ng-container *nzModalContent>
-    <p>Bla bla ...</p>
-    <p>Bla bla ...</p>
-    <p>Bla bla ...</p>
-  </ng-container>
+  <ng-container *nzModalContent> [RESPONSE] </ng-container>
 </nz-modal>
