@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Moeda, Conversao, ConversaoResponse } from '../models';
@@ -14,16 +14,31 @@ export class ConversorComponent implements OnInit {
   public modalAberto = false;
 
   public moedas: Moeda[];
-  private conversao: Conversao;
-  private possuiErro: boolean;
-  private conversaoResponse: ConversaoResponse;
+  public conversao: Conversao;
+  public possuiErro: boolean;
+  public conversaoResponse: ConversaoResponse;
+
+  @ViewChild('conversaoForm', { static: true }) conversaoForm: NgForm;
+  // Fará a ligação entre o formulário html e atributo de classe.
 
   constructor(
     private moedaService: MoedaService,
     private conversorService: ConversorService
   ) {}
 
+  public inicializandoValores(): void {
+    this.conversao = new Conversao('', '', null);
+    this.possuiErro = false;
+  }
+
+  public converter() {
+    if (this.conversaoForm.form.valid) {
+      alert('Convertendo ' + JSON.stringify(this.conversao));
+    }
+  }
+
   public abrirModal() {
+    this.converter();
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
@@ -37,17 +52,6 @@ export class ConversorComponent implements OnInit {
 
   ngOnInit(): void {
     this.moedas = this.moedaService.listarTodas();
-    // this.init()
+    this.inicializandoValores();
   }
 }
-
-
-
-  // public moedas = [
-  //   { codigo: 'USD', nome: 'Dólar', sigla: 'US$' },
-  //   { codigo: 'BRL', nome: 'Real', sigla: 'R$' },
-  //   { codigo: 'EUR', nome: 'Euro', sigla: '€' },
-  //   { codigo: 'GBP', nome: 'Libra', sigla: '£' },
-  //   { codigo: 'JPY', nome: 'Iene', sigla: '¥' },
-  //   { codigo: 'CAD', nome: 'Dólar Canadense', sigla: 'C$' },
-  // ];

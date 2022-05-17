@@ -1,5 +1,6 @@
 <div class="aviso">
   <nz-alert
+    *ngIf="possuiErro"
     nzBanner
     nzType="error"
     nzMessage="Erro ao tentar obter dados, por favor, tente novamente em alguns segundos"
@@ -13,39 +14,56 @@
   </div>
 
   <div class="form">
-
-    <form class="inputs">
-      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="De">
+    <form #conversaoForm="ngForm" class="inputs">
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="De"
+        name="moedaDe"
+        [(ngModel)]="conversao.moedaDe"
+        required
+      >
         <nz-option
           *ngFor="let moeda of moedas"
           nzCustomContent
-          [nzLabel]="moeda.descricao"
+          [nzLabel]="'(' + moeda.simbolo + ')' + ' ' + moeda.sigla"
           [nzValue]="moeda.sigla"
+          required
         >
-          {{ moeda.sigla }}
+          {{ moeda.descricao }}
         </nz-option>
       </nz-select>
 
       <input
         nz-input
+        name="valor"
+        [(ngModel)]="conversao.valor"
+        [dropSpecialCharacters]="false"
+        mask="0*.00"
         style="width: 100px; text-align: right"
         placeholder="0"
-        mask="0*.00"
+        required
       />
 
       <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
 
-      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Para">
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="Para"
+        name="moedaPara"
+        [(ngModel)]="conversao.moedaPara"
+        required
+      >
         <nz-option
           *ngFor="let moeda of moedas"
           nzCustomContent
-          [nzLabel]="moeda.descricao"
+          [nzLabel]="'(' + moeda.simbolo + ')' + ' ' + moeda.sigla"
           [nzValue]="moeda.sigla"
         >
-          {{ moeda.sigla }}
+          {{ moeda.descricao }}
         </nz-option>
       </nz-select>
-
     </form>
 
     <button
@@ -54,7 +72,7 @@
       nzShape="circle"
       (click)="abrirModal()"
       [nzLoading]="loading"
-      (click)="abrirModal()"
+      [disabled]="!conversaoForm.form.valid"
     >
       <i nz-icon nzType="search"></i>
     </button>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 // Ngx-mask
 import { NgxMaskModule, IConfig } from 'ngx-mask';
@@ -21,6 +22,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   declarations: [ConversorComponent],
   imports: [
     CommonModule,
+    FormsModule,
     NzAlertModule,
     NzInputModule,
     NzSelectModule,
