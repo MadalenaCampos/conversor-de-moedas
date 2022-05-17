@@ -14,7 +14,7 @@
   </div>
 
   <div class="form">
-    <form #conversaoForm="ngForm" class="inputs">
+    <form autocomplete="off" #conversaoForm="ngForm" class="inputs">
       <nz-select
         nzShowSearch
         nzAllowClear
@@ -70,7 +70,7 @@
       nz-button
       nzType="default"
       nzShape="circle"
-      (click)="abrirModal()"
+      (click)="converter()"
       [nzLoading]="loading"
       [disabled]="!conversaoForm.form.valid"
     >
@@ -80,7 +80,7 @@
 </div>
 
 <nz-modal
-  [(nzVisible)]="modalAberto"
+  [(nzVisible)]="modalAberto && !possuiErro"
   nzTitle="Cotação em: [DATA]"
   nzClosable="false"
   nzCancelText="Fechar"

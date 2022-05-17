@@ -33,17 +33,19 @@ export class ConversorComponent implements OnInit {
 
   public converter() {
     if (this.conversaoForm.form.valid) {
-      alert('Convertendo ' + JSON.stringify(this.conversao));
+      this.loading = true;
+      this.conversorService.converter(this.conversao).subscribe(
+        (response) => {
+          this.conversaoResponse = response;
+          this.possuiErro = response.error ? true : null;
+          console.log(response);
+        },
+        () => {},
+        () => {
+          this.loading = false;
+        }
+      );
     }
-  }
-
-  public abrirModal() {
-    this.converter();
-    this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      this.modalAberto = true;
-    }, 1000);
   }
 
   public sairEOutraConsulta(): void {
