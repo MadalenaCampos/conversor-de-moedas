@@ -38,6 +38,7 @@ export class ConversorComponent implements OnInit {
       this.conversorService.converter(this.conversao).subscribe(
         (response) => {
           this.conversaoResponse = response;
+          console.log(response)
           this.modalAberto = true;
         },
         (error) => {
