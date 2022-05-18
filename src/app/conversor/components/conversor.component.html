@@ -3,8 +3,7 @@
     *ngIf="possuiErro"
     nzBanner
     nzType="error"
-    nzMessage="Erro ao tentar obter dados, por favor, tente novamente em alguns segundos"
-    nzCloseable
+    [nzMessage]="this.mensagemDeErro"
   ></nz-alert>
 </div>
 

@@ -17,6 +17,7 @@ export class ConversorComponent implements OnInit {
   public conversao: Conversao;
   public possuiErro: boolean;
   public conversaoResponse: ConversaoResponse;
+  public mensagemDeErro!: string;
 
   @ViewChild('conversaoForm', { static: true }) conversaoForm: NgForm;
   // Fará a ligação entre o formulário html e atributo de classe.
@@ -38,7 +39,23 @@ export class ConversorComponent implements OnInit {
         (response) => {
           this.conversaoResponse = response;
           this.possuiErro = response.error ? true : null;
-          console.log(response);
+
+          // Tradução dos erros, solução temporária
+          if (
+            response.error.code ===
+            'Your monthly usage limit has been reached. Please upgrade your Subscription Plan.'
+          ) {
+            this.mensagemDeErro =
+              'Seu limite de uso mensal foi atingido. Por favor, atualize seu Plano de Assinatura.';
+          } else if (
+            response.error.info ===
+            'You have not supplied a valid API Access Key. [Technical Support: support@apilayer.com]'
+          ) {
+            this.mensagemDeErro =
+              'Você não forneceu uma chave de acesso de API válida. [Suporte técnico: support@apilayer.com]';
+          } else {
+            this.mensagemDeErro = response.error.code;
+          }
         },
         () => {},
         () => {

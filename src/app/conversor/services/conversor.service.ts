@@ -14,7 +14,7 @@ import { Conversao, ConversaoResponse } from '../models';
 export class ConversorService {
   // Nova url do fixer.io, que adiciona o parâmetro access_key, que é a chave de autenticação
   private readonly BASE_URL =
-    'http://data.fixer.io/api/latest?access_key=eba7130a5b2d720ce43eb5fcddd47cc3';
+    'http://data.fixer.io/api/latest?access_key=1Pd00KAXNdqGnY1U6Cb0tfX4i3Q0mIJa';
 
   constructor(private http: HttpClient) {}
 
