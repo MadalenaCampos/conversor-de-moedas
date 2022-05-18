@@ -38,26 +38,12 @@ export class ConversorComponent implements OnInit {
       this.conversorService.converter(this.conversao).subscribe(
         (response) => {
           this.conversaoResponse = response;
-          this.possuiErro = response.error ? true : null;
-
-          // Tradução dos erros, solução temporária
-          if (
-            response.error.code ===
-            'Your monthly usage limit has been reached. Please upgrade your Subscription Plan.'
-          ) {
-            this.mensagemDeErro =
-              'Seu limite de uso mensal foi atingido. Por favor, atualize seu Plano de Assinatura.';
-          } else if (
-            response.error.info ===
-            'You have not supplied a valid API Access Key. [Technical Support: support@apilayer.com]'
-          ) {
-            this.mensagemDeErro =
-              'Você não forneceu uma chave de acesso de API válida. [Suporte técnico: support@apilayer.com]';
-          } else {
-            this.mensagemDeErro = response.error.code;
-          }
+          this.modalAberto = true;
         },
-        () => {},
+        (error) => {
+          this.mensagemDeErro = error.statusText;
+          this.possuiErro = true;
+        },
         () => {
           this.loading = false;
         }

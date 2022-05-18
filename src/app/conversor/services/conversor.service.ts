@@ -12,16 +12,16 @@ import { Conversao, ConversaoResponse } from '../models';
 
 @Injectable()
 export class ConversorService {
-  // Nova url do fixer.io, que adiciona o parâmetro access_key, que é a chave de autenticação
   private readonly BASE_URL =
-    'http://data.fixer.io/api/latest?access_key=1Pd00KAXNdqGnY1U6Cb0tfX4i3Q0mIJa';
+    'https://api.frankfurter.app/latest?';
 
   constructor(private http: HttpClient) {}
 
   //Realiza a chamada para a API de conversão de moedas.
   public converter(conversao: Conversao): Observable<any> {
-    let params = `&base=${conversao.moedaDe}&symbols=${conversao.moedaPara}`;
+    let params = `amount=${conversao.valor}&from=${conversao.moedaDe}&to=${conversao.moedaPara}`;
     return this.http.get(this.BASE_URL + params);
+
     // Essa é a rota da API com os parâmetros que serão passados para a requisição
   }
 
