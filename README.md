@@ -4,7 +4,7 @@
 
 > Projeto simples de conversão de moedas, utilizando o <a href="https://angular.io/">🔗 Angular</a> e a biblioteca <a href="https://ng.ant.design/docs/introduce/en">🔗 NG-ZORRO</a>, baseado na API <a href="https://www.frankfurter.app/">🔗 Frankfurter</a>.
 
-## 🚀 Instalando <nome_do_projeto>
+## 🚀 Instalando conversor-de-moedas
 
 Para instalar o conversor-de-moedas, siga estas etapas:
 
