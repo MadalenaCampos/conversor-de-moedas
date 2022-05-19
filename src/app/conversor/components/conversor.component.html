@@ -1,113 +1,116 @@
-<div class="aviso">
-  <nz-alert
-    *ngIf="possuiErro"
-    nzBanner
-    nzType="error"
-    [nzMessage]="mensagemDeErro"
-  ></nz-alert>
-</div>
+<div class="conversor">
+  <div selecao>
+    <div class="header">
+      <h1>Selecione a moeda a ser convertida</h1>
+    </div>
 
-<div class="selecao">
-  <div class="header">
-    <h1>Selecione a moeda a ser convertida</h1>
-  </div>
-
-  <div class="form">
-    <form autocomplete="off" #conversaoForm="ngForm" class="inputs">
-      <nz-select
-        nzShowSearch
-        nzAllowClear
-        nzPlaceHolder="De"
-        name="moedaDe"
-        [(ngModel)]="conversao.moedaDe"
-        required
-      >
-        <nz-option
-          *ngFor="let moeda of moedas"
-          nzCustomContent
-          [nzLabel]="'(' + moeda.simbolo + ')' + ' ' + moeda.sigla"
-          [nzValue]="moeda.sigla"
+    <div class="form">
+      <form autocomplete="off" #conversaoForm="ngForm" class="inputs">
+        <nz-select
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="De"
+          name="moedaDe"
+          [(ngModel)]="conversao.moedaDe"
           required
         >
-          {{ moeda.descricao }}
-        </nz-option>
-      </nz-select>
+          <nz-option
+            *ngFor="let moeda of moedas"
+            nzCustomContent
+            [nzLabel]="'(' + moeda.simbolo + ')' + ' ' + moeda.sigla"
+            [nzValue]="moeda.sigla"
+            required
+          >
+            {{ moeda.descricao }}
+          </nz-option>
+        </nz-select>
 
-      <input
-        nz-input
-        name="valor"
-        [(ngModel)]="conversao.valor"
-        [dropSpecialCharacters]="false"
-        mask="0*.00"
-        style="width: 100px; text-align: right"
-        placeholder="0"
-        required
-      />
+        <input
+          nz-input
+          name="valor"
+          [(ngModel)]="conversao.valor"
+          [dropSpecialCharacters]="false"
+          mask="0*.00"
+          placeholder="0"
+          required
+        />
 
-      <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+        <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
 
-      <nz-select
-        nzShowSearch
-        nzAllowClear
-        nzPlaceHolder="Para"
-        name="moedaPara"
-        [(ngModel)]="conversao.moedaPara"
-        required
-      >
-        <nz-option
-          *ngFor="let moeda of moedas"
-          nzCustomContent
-          [nzLabel]="'(' + moeda.simbolo + ')' + ' ' + moeda.sigla"
-          [nzValue]="moeda.sigla"
+        <nz-select
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Para"
+          name="moedaPara"
+          [(ngModel)]="conversao.moedaPara"
+          required
         >
-          {{ moeda.descricao }}
-        </nz-option>
-      </nz-select>
-    </form>
+          <nz-option
+            *ngFor="let moeda of moedas"
+            nzCustomContent
+            [nzLabel]="'(' + moeda.simbolo + ')' + ' ' + moeda.sigla"
+            [nzValue]="moeda.sigla"
+          >
+            {{ moeda.descricao }}
+          </nz-option>
+        </nz-select>
+      </form>
 
-    <button
-      nz-button
-      nzType="default"
-      nzShape="circle"
-      (click)="converter()"
-      [nzLoading]="loading"
-      [disabled]="!conversaoForm.form.valid"
-    >
-      <i nz-icon nzType="search"></i>
-    </button>
-  </div>
-</div>
-
-<nz-modal
-  [(nzVisible)]="modalAberto && !possuiErro"
-  nzTitle=""
-  nzClosable="false"
-  [nzFooter]="null"
->
-  <ng-container *nzModalContent>
-    <div class="data">
-      <p>
-        Cotação em:
-        <b>{{ conversaoResponse.date | date }}</b>
-      </p>
-    </div>
-    <div class="resultado">
-      <div class="moedaDe">
-        <h1>{{ conversaoResponse.amount }} {{ conversao.moedaDe }}</h1>
-      </div>
-
-      <div class="igual">
-        <h1>=</h1>
-      </div>
-
-      <div class="moedaPara">
-        <h1>{{ resultado }} {{ conversao.moedaPara }}</h1>
-      </div>
-    </div>
-    <div class="footer">
-      <button nz-button nzType="primary" (click)="outraConsulta()">
-        Nova consulta
+      <button
+        nz-button
+        nzType="default"
+        nzShape="circle"
+        (click)="converter()"
+        [nzLoading]="loading"
+        [disabled]="!conversaoForm.form.valid"
+      >
+        <i nz-icon nzType="search"></i>
       </button>
     </div>
-  </ng-container>
-</nz-modal>
+
+    <div error>
+      <nz-alert
+        *ngIf="possuiErro"
+        nzBanner
+        nzType="error"
+        [nzMessage]="mensagemDeErro"
+      ></nz-alert>
+    </div>
+  </div>
+
+  <div modal>
+    <nz-modal
+      [(nzVisible)]="modalAberto && !possuiErro"
+      nzTitle=""
+      nzClosable="false"
+      [nzFooter]="null"
+    >
+      <ng-container *nzModalContent>
+        <div class="data">
+          <p>
+            Cotação em:
+            <b>{{ conversaoResponse.date | date }}</b>
+          </p>
+        </div>
+        <div class="resultado">
+          <div class="moedaDe">
+            <h1>{{ conversaoResponse.amount }} {{ conversao.moedaDe }}</h1>
+          </div>
+
+          <div class="igual">
+            <h1>=</h1>
+          </div>
+
+          <div class="moedaPara">
+            <h1>{{ resultado }} {{ conversao.moedaPara }}</h1>
+          </div>
+        </div>
+        <div class="footer">
+          <button nz-button nzType="primary" (click)="outraConsulta()">
+            Nova consulta
+          </button>
+        </div>
+      </ng-container>
+    </nz-modal>
+  </div>
+</div>

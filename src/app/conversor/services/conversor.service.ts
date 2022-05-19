@@ -12,8 +12,7 @@ import { Conversao, ConversaoResponse } from '../models';
 
 @Injectable()
 export class ConversorService {
-  private readonly BASE_URL =
-    'https://api.frankfurter.app/latest?';
+  private readonly BASE_URL = 'https://api.frankfurter.app/latest?';
 
   constructor(private http: HttpClient) {}
 
@@ -23,35 +22,5 @@ export class ConversorService {
     return this.http.get(this.BASE_URL + params);
 
     // Essa é a rota da API com os parâmetros que serão passados para a requisição
-  }
-
-  // Ambas as funções abaixo são para o caso de o usuário não informar a moeda de origem, e fazer a conversão para o padrão da moeda, retornando a cotação delas.
-  public cotacaoPara(
-    conversaoResponse: ConversaoResponse,
-    conversao: Conversao
-  ): number {
-    if (conversaoResponse === undefined) {
-      return 0;
-    }
-    return conversaoResponse.rates[conversao.moedaPara];
-  }
-
-  public cotacaoDe(
-    conversaoResponse: ConversaoResponse,
-    conversao: Conversao
-  ): string {
-    if (conversaoResponse === undefined) {
-      return '0';
-    }
-    return (1 / conversaoResponse.rates[conversao.moedaPara]).toFixed(2);
-    // O 1 é usado como base, representado uma unidade da moeda base, onde 1 dividido pela moeda de destino me permite saber qual a cotação da minha moeda base. O 4 é o número de casas decimais que serão mostradas.
-  }
-
-  // Verifica se existe uma data da cotação da moeda. Caso sim exibe, se não, retorna uma string vazia.
-  public dataCotacao(conversaoResponse: ConversaoResponse): string {
-    if (conversaoResponse === undefined) {
-      return '';
-    }
-    return conversaoResponse.date;
   }
 }

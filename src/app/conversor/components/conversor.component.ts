@@ -41,16 +41,25 @@ export class ConversorComponent implements OnInit {
           this.conversaoResponse = response;
           console.log(response);
           this.resultado =
-            this.conversaoResponse.rates[this.conversao.moedaPara];
+            this.conversaoResponse.rates[this.conversao.moedaPara].toFixed(2);
           this.modalAberto = true;
         },
         (error) => {
-          this.mensagemDeErro = error.statusText;
           this.possuiErro = true;
-          this.loading = false; // Solução para o loading do botão parar quando retornar erro
+
+          // Tratamento para as mensagens de erros, pois a API não fornece mensagens claras
+          if (this.conversao.moedaDe === this.conversao.moedaPara) {
+            this.mensagemDeErro =
+              'A moeda de origem e de destino não podem ser iguais';
+          } else {
+            this.mensagemDeErro =
+              'Ocorreu um erro na requisição, por favor, tente novamente em alguns segundos';
+          }
+          this.loading = false;
         },
         () => {
           this.loading = false;
+          this.possuiErro = false;
         }
       );
     }
