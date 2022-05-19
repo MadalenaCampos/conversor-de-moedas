@@ -80,25 +80,34 @@
 
 <nz-modal
   [(nzVisible)]="modalAberto && !possuiErro"
-  nzTitle="Conversão"
+  nzTitle=""
   nzClosable="false"
-  nzCancelText="Fechar"
-  (nzOnCancel)="sairEOutraConsulta()"
-  nzOkText="Fazer outra consulta"
-  (nzOnOk)="sairEOutraConsulta()"
+  [nzFooter]="null"
 >
   <ng-container *nzModalContent>
     <div class="data">
-      {{ conversaoResponse.date }}
+      <p>
+        Cotação em:
+        <b>{{ conversaoResponse.date | date }}</b>
+      </p>
     </div>
     <div class="resultado">
       <div class="moedaDe">
-        <h1>{{ conversaoResponse.amount }} {{ conversao.moedaDe }} =</h1>
+        <h1>{{ conversaoResponse.amount }} {{ conversao.moedaDe }}</h1>
+      </div>
+
+      <div class="igual">
+        <h1>=</h1>
       </div>
 
       <div class="moedaPara">
-        <h1> {{ conversao.moedaPara }}</h1>
+        <h1>{{ resultado }} {{ conversao.moedaPara }}</h1>
       </div>
+    </div>
+    <div class="footer">
+      <button nz-button nzType="primary" (click)="outraConsulta()">
+        Nova consulta
+      </button>
     </div>
   </ng-container>
 </nz-modal>

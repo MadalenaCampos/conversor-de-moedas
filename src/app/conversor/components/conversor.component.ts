@@ -18,6 +18,7 @@ export class ConversorComponent implements OnInit {
   public possuiErro: boolean;
   public conversaoResponse: ConversaoResponse;
   public mensagemDeErro!: string;
+  public resultado!: number;
 
   @ViewChild('conversaoForm', { static: true }) conversaoForm: NgForm;
   // Fará a ligação entre o formulário html e atributo de classe.
@@ -38,12 +39,15 @@ export class ConversorComponent implements OnInit {
       this.conversorService.converter(this.conversao).subscribe(
         (response) => {
           this.conversaoResponse = response;
-          console.log(response)
+          console.log(response);
+          this.resultado =
+            this.conversaoResponse.rates[this.conversao.moedaPara];
           this.modalAberto = true;
         },
         (error) => {
           this.mensagemDeErro = error.statusText;
           this.possuiErro = true;
+          this.loading = false; // Solução para o loading do botão parar quando retornar erro
         },
         () => {
           this.loading = false;
@@ -52,8 +56,13 @@ export class ConversorComponent implements OnInit {
     }
   }
 
-  public sairEOutraConsulta(): void {
+  public sair(): void {
     this.modalAberto = false;
+  }
+
+  public outraConsulta() {
+    this.modalAberto = false;
+    this.inicializandoValores();
   }
 
   ngOnInit(): void {
